@@ -10,7 +10,6 @@ import com.pollub.cookie.model.User;
 import com.pollub.cookie.repository.CategoryRepository;
 import com.pollub.cookie.repository.ProductRepository;
 import com.pollub.cookie.repository.UserRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,10 +54,8 @@ class ProductControllerIntegrationTest {
 
     private Long categoryId;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private Optional<User> adminUser;
-    private User adminUserCreate;
     private Category testCategory;
 
     @BeforeEach
@@ -75,9 +72,9 @@ class ProductControllerIntegrationTest {
         categoryId = testCategory.getId();
 
 
-        adminUser = userRepository.findByEmail("admin@example.com");
+        Optional<User> adminUser = userRepository.findByEmail("admin@example.com");
         if (adminUser.isEmpty()) {
-            adminUserCreate = new User();
+            User adminUserCreate = new User();
             adminUserCreate.setEmail("admin@example.com");
             adminUserCreate.setPassword(passwordEncoder.encode("adminpassword"));
             adminUserCreate.setRole(Role.ADMIN);
