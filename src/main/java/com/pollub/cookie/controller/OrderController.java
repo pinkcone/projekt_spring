@@ -130,7 +130,6 @@ public class OrderController {
     @PutMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long id, @RequestBody Map<String, String> statusUpdate) {
-        System.out.println("chuj jebanyj");
         String newStatus = statusUpdate.get("status");
         System.out.println(newStatus);
         OrderDTO updatedOrder = orderService.updateOrderStatus(id, newStatus);

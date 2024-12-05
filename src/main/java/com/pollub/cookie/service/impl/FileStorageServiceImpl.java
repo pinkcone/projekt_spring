@@ -1,5 +1,6 @@
 package com.pollub.cookie.service.impl;
 
+import com.pollub.cookie.exception.InvalidFileTypeException;
 import com.pollub.cookie.service.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +43,8 @@ public class FileStorageServiceImpl implements FileStorageService {
     }
 
     public String getFileExtension(String fileName) {
-        if (fileName == null) {
-            return null;
+        if (fileName == null || fileName.isEmpty()) {
+            throw new InvalidFileTypeException("Przesłany plik nie jest obrazem.");
         }
         String extension = "";
 

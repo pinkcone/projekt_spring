@@ -174,7 +174,6 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO updateOrderStatus(Long id, String newStatus) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Zamówienie nie znalezione o ID: " + id));
-        System.out.println("jebac ci bobra");
         try {
             OrderStatus status = OrderStatus.valueOf(newStatus);
             order.setOrderStatus(status);
